@@ -3,10 +3,14 @@ from pathlib import Path
 import re
 import json
 from typing import Dict
+import datetime
 
 with open('dictonary.json') as json_file:
     colors_dictonary = json.load(json_file)
 
+def save_to_log(text:str) -> None :
+    log.write('\n' + str(text))
+    
 def prGreen(skk) :
     print("\033[92m{}\033[00m" .format(skk))
     
@@ -18,13 +22,15 @@ def prCyan(skk) :
 
 def replace_var_values(line: str, text: str, vars: Dict) -> str:
     new_text = line.replace(text, vars[text])
-    print("Replaced " + text + " => " + vars[text])
+    save_to_log(text + " -> " + vars[text])
     return new_text
 
 def replace_variables_in_file(filename: str, var_dict: Dict) -> None:
     try:
         with open(filename, "r+") as fh:
             prCyan("Processing " + filename.name)
+            save_to_log(input_dir + "/" + filename.name)
+
             replaced_count = 0
             
             content = fh.readlines()
@@ -42,8 +48,11 @@ def replace_variables_in_file(filename: str, var_dict: Dict) -> None:
                         replaced_count += 1
             if(replaced_count == 0) :
                 prCyan("No matching variable found in " + filename.name)
+                save_to_log("No matching variable found in " + filename.name)
             else :
                 prCyan("Replaced " + str(replaced_count) + " variables in " + filename.name)
+                # saving empty line to log
+                save_to_log("")
             fh.seek(0)
             fh.truncate()
             fh.writelines(content)
@@ -74,8 +83,12 @@ def init(folder_path: str) -> None:
         replace_variables_in_file(file, colors_dictonary)  
 
     prGreen('End\n')
+    # saving empty line to log
+    save_to_log("\n")
 
-# init('/Users/vishalbhojane/Documents/MyCode/nodejs/test')
+log = open('log.txt', 'a')
+log.write("[" + str(datetime.datetime.now()) + "]")
 
-input_dir = input("Paste the directory path:")
+input_dir = '/Users/vishalbhojane/Documents/MyCode/nodejs/replace-from-dictionary/test'
+# input_dir = input("Paste the directory path:")
 init(input_dir)
