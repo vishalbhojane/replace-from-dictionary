@@ -9,14 +9,14 @@ var_combinator = [
     'a)','b)','c)','d)','e)','f)','g)','h)','i)','j)','k)','l)','m)','n)','o)','p)','q)','r)','s)','t)','u)','v)','w)','x)','y)','z)',
     'A)','B)','C)','D)','E)','F)','G)','H)','I)','J)','K)','L)','M)','N)','O)','P)','Q)','R)','S)','T)','U)','V)','W)','X)','Y)','Z)',
     '0)','1)','2)','3)','4)','5)','6)','7)','8)','9)',
-    '_)',]
+    '_)']
 
 with open('dictonary.json') as json_file:
     colors_dictonary = json.load(json_file)
 
 def save_to_log(text:str) -> None :
     log.write('\n' + str(text))
-    
+
 def prGreen(skk) :
     print("\033[92m{}\033[00m" .format(skk))
     
