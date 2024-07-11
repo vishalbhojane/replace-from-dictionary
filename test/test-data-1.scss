@@ -1,24 +1,10 @@
-#ffffff: #ffffff;
-#000000: #000000;
-#82a916: #82a916;
-#2b7fc7: #2b7fc7;
-#eeeeee: (#eeeeee);
-
-.bafoverlay-btn {
-    color: #ffffff;
-    border: 1px solid #4c6007;
+$bg-black:$blue-lighter1;
+$bg-white:$blue-lighter2;
+$bg-white:($blue-lighter3);
+$bg-white: ($blue-lighter3);
+button{
+    border: 1px solid $blue-lighter1;
     @include borderradius(23px);
-    @include gradient($origin: bottom, $fallback: #ffffff, $stops: (#ffffff 11%, #cfed07 24%, #cfed07 62%, #b3d105 78%, #829903 93%, ));
     @include box-shadow(0 0 5px #4d9846);
-    font-weight: 700;
-    cursor: pointer;
-    text-decoration: none;
-    display: block;
-    font-size: 0.9rem;
-    text-align: center;
-    padding: 3%;
-
-    @media screen and(min-width:760px) {
-        font-size: 1.1rem;
-    }
+    @include gradient($origin:bottom,$fallback:($blue-lighter1),$stops:(($blue-lighter1) 11%,#cfed07 24%,#cfed07 62%,#b3d105 78%, #829903 93%, ));
 }
